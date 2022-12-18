@@ -10,14 +10,17 @@ if __name__ == "__main__" :
     
     parser = argparse.ArgumentParser(description='Takes a photograph with the webcam and identifies the brightest pixel(s). An angle can be specified for 3d reconstruction')
     parser.add_argument('-a', metavar='ANGLE', type=float, required=False, help='specify the angle by which the system has been rotated with respect to the camera axis')
+    parser.add_argument('-c', metavar='CAM', type=int, required=False, help='override default camera port 0')
     args = parser.parse_args()
     
+    angle = 0.
+    cam = 0
     if args.a :
         angle = args.a*ut.deg2rad
-    else :
-        angle = 0
+    if args.c :
+        cam = args.c
 
-    cam = cv.VideoCapture(0)
+    cam = cv.VideoCapture(cam)
     result, image = cam.read()
     
     if not result :
