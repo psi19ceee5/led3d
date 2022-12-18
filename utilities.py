@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+import math
+
+deg2rad = math.pi/180.
+rad2deg = 180./math.pi
+
+
 def draw_reticle(image, imax) :
     ix = imax[1]
     iy = imax[0]

@@ -2,9 +2,20 @@
 
 import cv2 as cv
 import numpy as np
+import math
+import argparse
 import utilities as ut
 
 if __name__ == "__main__" :
+    
+    parser = argparse.ArgumentParser(description='Takes a photograph with the webcam and identifies the brightest pixel(s). An angle can be specified for 3d reconstruction')
+    parser.add_argument('-a', metavar='ANGLE', type=float, required=False, help='specify the angle by which the system has been rotated with respect to the camera axis')
+    args = parser.parse_args()
+    
+    if args.a :
+        angle = args.a*ut.deg2rad
+    else :
+        angle = 0
 
     cam = cv.VideoCapture(0)
     result, image = cam.read()
@@ -30,6 +41,7 @@ if __name__ == "__main__" :
                 hot_pixels += 1
                 
     print("Hottest pixels:", hot_pixels)
+    print("Viewing angle:", angle*ut.rad2deg, "deg")
     
     cv.imshow("ImgCapture", image)
     cv.waitKey(0)
