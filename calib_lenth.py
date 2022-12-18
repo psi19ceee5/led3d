@@ -3,6 +3,7 @@
 import cv2 as cv
 import numpy as np
 import math
+import argparse
 import utilities as ut
 
 coords = []
@@ -15,8 +16,17 @@ def mouseclick(event, y, x, flags, params) :
         coords.append((x,y))
 
 if __name__ == "__main__" :
+    
+    parser = argparse.ArgumentParser(description='Script for calibrating pixel distance to real-world distance')
+    parser.add_argument('-c', metavar='CAM', type=int, required=False, help='override default camera port 0')
+    args = parser.parse_args()
+    
+    cam = 0
+    if args.c :
+        cam = args.c
 
-    cam = cv.VideoCapture(0)
+
+    cam = cv.VideoCapture(cam)
     result, image = cam.read()
 
     if not result :
