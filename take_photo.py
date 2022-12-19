@@ -3,7 +3,7 @@
 import cv2 as cv
 import numpy as np
 import argparse
-import utilities as ut
+import src.utilities as ut
 
 if __name__ == "__main__" :
     
