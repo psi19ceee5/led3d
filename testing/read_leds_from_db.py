@@ -1,5 +1,6 @@
 import sqlite3
 import bpy
+from ..src import utilities
 
 def create_connection(db_file) :
     conn = None
