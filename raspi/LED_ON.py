@@ -12,10 +12,10 @@ try:
     ledid = int(sys.argv[1])
 except TypeError:
     print("Please enter an integer value between 0 and ", num_pixels-1, "!")
-    break
+    sys.exit(1)
 except IndexError:
     print("Please specify the ID of the LED you want to turn on (between 0 and ", num_pixels -1, ")!")
-    break
+    sys.exit(1)
 
 if ledid < num_pixels and 0 <= ledid:
     pixels[ledid] = (0, 0, 255)
