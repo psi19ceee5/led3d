@@ -3,8 +3,7 @@
 import sys
 import board
 import neopixel
-sys.path.append('..')
-import config
+from .. import config
 
 num_pixels = config.NLEDs
 
