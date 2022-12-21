@@ -1,35 +1,60 @@
 import sqlite3
 import bpy
-from ..src import utilities
+import sys
+sys.path.append('..')
+import math
+import src.dbio as db
+import src.led as led
 
-def create_connection(db_file) :
-    conn = None
-    try:
-        conn = sqlite3.connect(db_file)
-    except Error as e :
-        print("[ERROR]:", e)
-        
-    return conn
-
-def read_led(conn, id) :
-    sql = ' SELECT * FROM leds WHERE led_id = ? '
-    cur = conn.cursor()
-    cur.execute(sql, (id,))
-    
-    (_, x, y, z) = cur.fetchall()[0]
-    
-    return (x, y, z)
-
-if __name__ == "__main__" :
-    
-    conn = create_connection("/home/philip/Projects/led3d/db/calibinfo.sqlite")
-    
-    for id in range(500) :
-        (x, y, z) = read_led(conn, id)
+class sim_led(led.proto_led) :
+    def __init__(self, id, pos=(0, 0, 0), col=(0, 0, 0)) :
+        super().__init__(id, pos=pos, col=col)
         bpy.ops.mesh.primitive_uv_sphere_add(segments=16, 
                                              ring_count=8, 
                                              radius=0.01, 
                                              enter_editmode=False, 
                                              align='WORLD', 
-                                             location=(x, y, z), 
+                                             location=(self.x, self.y, self.z), 
                                              scale=(1, 1, 1))
+        ob = bpy.context.active_object
+        ob.name = "Sphere-" + str(self.led_id)
+        mat = bpy.data.materials.new(name="LED-" + str(self.led_id))
+        mat.diffuse_color = (self.r, self.g, self.b, 1)
+        # Assign it to object
+        if ob.data.materials:
+            # assign to 1st material slot
+            ob.data.materials[0] = mat
+        else:
+            # no slots
+            ob.data.materials.append(mat)
+        self.frame = 0
+
+    def commit(self) :
+        bpy.data.objects['Sphere-' + str(self.led_id)].select_set(True)
+        ob = bpy.context.active_object
+        mat = bpy.data.materials["LED-" + str(self.led_id)]
+        mat.diffuse_color = (self.r, self.g, self.b, 1)
+        mat.keyframe_insert(data_path="diffuse_color", frame=self.frame)
+        
+
+if __name__ == "__main__" :
+    
+    conn = db.create_connection("/home/philip/Projects/led3d/db/calibinfo.sqlite")
+
+    leds = []
+    for id in range(500) :
+        (x, y, z) = db.read_led(conn, id)
+        leds.append(sim_led(id, (x, y, z), (1, 1, 1)))
+    
+    fps = 25
+    phase_r = 0
+    phase_g = 60*math.pi/180.
+    phase_b = 120*math.pi/180.
+    for frame in range(250) :
+        for led in leds :            
+            r = math.sin(0.5*math.pi*(frame/fps) - (math.pi/0.25)*led.z + phase_r)**2
+            g = math.sin(0.5*math.pi*(frame/fps) - (math.pi/0.25)*led.z + phase_g)**2
+            b = math.sin(0.5*math.pi*(frame/fps) - (math.pi/0.25)*led.z + phase_b)**2
+            led.frame = frame
+            led.set_rgb(r, g, b)
+            led.commit()
