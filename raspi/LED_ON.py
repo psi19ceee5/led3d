@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
-import sys
 import board
 import neopixel
+import sys
 sys.path.append('..')
 import src.config
 
-num_pixels = config.NLEDs
+num_pixels = src.config.NLEDs
 
 pixels = neopixel.NeoPixel(board.D18, num_pixels)
 
