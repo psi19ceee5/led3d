@@ -10,14 +10,18 @@ if __name__ == "__main__" :
     parser = argparse.ArgumentParser(description='Takes a photograph with the webcam and identifies the brightest pixel(s). An angle can be specified for 3d reconstruction')
     parser.add_argument('-a', metavar='ANGLE', type=float, required=False, help='specify the angle by which the system has been rotated with respect to the camera axis')
     parser.add_argument('-c', metavar='CAM', type=int, required=False, help='override default camera port 0')
+    parser.add_argument('-d', action='store_true', help='run in debug mode: image is shown with reticles on brightest pixels and more information is printed to screen')
     args = parser.parse_args()
     
     angle = 0.
     cam = 0
+    debug = False
     if args.a :
-        angle = args.a*ut.deg2rad
+        angle = args.a
     if args.c :
         cam = args.c
+    if args.d :
+        debug = True
 
     cam = cv.VideoCapture(cam)
     result, image = cam.read()
@@ -26,14 +30,16 @@ if __name__ == "__main__" :
         print("[ERROR]: No image has been taken. Perhaps, try another camera port.")
         exit
     else :
-        print("Shape of image: ", np.shape(image))
+        if debug :
+            print("Shape of image: ", np.shape(image))
         
     # note: colors in BGR
     filtered_img = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
     
     imax = np.unravel_index(filtered_img.argmax(), np.shape(filtered_img))
-    print("Brightest pixel (first occurence):", imax)
-    print("Brightness:", filtered_img[imax])
+    if debug :
+        print("Brightest pixel (first occurence):", imax)
+        print("Brightness:", filtered_img[imax])
     
     hot_pixels = 0
     for i_ in range(len(filtered_img)) :
@@ -42,11 +48,12 @@ if __name__ == "__main__" :
                 ut.draw_reticle(image, (i_, j_))
                 hot_pixels += 1
                 
-    print("Hottest pixels:", hot_pixels)
-    print("Viewing angle:", angle*ut.rad2deg, "deg")
+    if debug :
+        print("Hottest pixels:", hot_pixels)
+        print("Viewing angle:", angle, "deg")
+        cv.imshow("ImgCapture", image)
+        cv.waitKey(0)
+        cv.destroyAllWindows()
     
-    cv.imshow("ImgCapture", image)
-    cv.waitKey(0)
-    cv.destroyAllWindows()
-    #cv.imwrite("ImgCapture.png", image)
-    
+    if not debug :
+        print(angle, imax[0], imax[1])
