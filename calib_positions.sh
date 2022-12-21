@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 PROJECTPATH=/home/pi/projects/led3d
-NLEDs=$(cat config.py | grep NLEDs | awk -F'=' '{print $2}')
+NLEDs=$(cat ${PROJECTPATH}/src/config.py | grep NLEDs | awk -F'=' '{print $2}')
 ANGLE=$1
 
 echo "Calibration cycle will start in 5s ..."
