@@ -10,7 +10,7 @@ pixels = neopixel.NeoPixel(board.D18, num_pixels)
 
 try:
     ledid = int(sys.argv[1])
-except TypeError, ValueError:
+except (TypeError, ValueError):
     print("Please enter an integer value between 0 and ", num_pixels-1, "!")
     sys.exit(1)
 except IndexError:
