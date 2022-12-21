@@ -45,6 +45,10 @@ if __name__ == "__main__" :
     dist = float(input("Enter the separation (in meter) of the two pixels in the real world: "))
     pxdist = math.sqrt((coords[0][0] - coords[1][0])**2 + (coords[0][1] - coords[1][1])**2)
     
-    print("Conversion factor [meter / pixel]:", dist/pxdist)    
+    factor = dist/pxdist
+    file = open("/tmp/lengthcalib", "w")
+    file.write(str(factor))
+    file.close()
+    print("Conversion factor [meter / pixel]:", factor)
     print("Press any key to quit")
     cv.waitKey(0)
