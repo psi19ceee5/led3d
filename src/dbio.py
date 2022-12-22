@@ -42,7 +42,7 @@ def delete_measurement_angle(conn, angle) :
 def delete_measurement_id(conn, id) :
     sql = ' DELETE FROM measurements WHERE led_id = ? '
     cur = conn.cursor()
-    cur.execute(sql, (angle,))
+    cur.execute(sql, (id,))
     conn.commit()  
     
 def read_measurement(conn, id) :
