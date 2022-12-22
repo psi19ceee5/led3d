@@ -23,5 +23,12 @@ if __name__ == '__main__':
                                     ); """
                                     
     db.create_table(conn, sql_create_measurements)
+        
+    if db.create_measurement(conn, (led_id, angle, i_x, i_y)) :
+        print("Created measurement of led number", led_id)
+    elif db.update_measurement(conn, (led_id, angle, i_x, i_y)) : 
+        print("Updated measurement of led number", led_id)
+    else :
+        print("[ERROR]: Measurement of led number", led_id,"could not be registered with the database.")
     
-    db.create_measurement(conn, (led_id, angle, i_x, i_y))
+    
