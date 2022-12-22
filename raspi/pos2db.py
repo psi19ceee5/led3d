@@ -12,7 +12,7 @@ if __name__ == '__main__':
     i_x = sys.argv[3]
     i_y = sys.argv[4]
 
-    conn = db.create_connection('db/calibinfo.sqlite')
+    conn = db.create_connection('../db/calibinfo.sqlite')
     
     sql_create_measurements = """ CREATE TABLE IF NOT EXISTS measurements (
                                         led_id INT NOT NULL
