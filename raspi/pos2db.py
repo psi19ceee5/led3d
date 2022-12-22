@@ -15,10 +15,10 @@ if __name__ == '__main__':
     conn = db.create_connection('../db/calibinfo.sqlite')
     
     sql_create_measurements = """ CREATE TABLE IF NOT EXISTS measurements (
-                                        led_id INT NOT NULL
-                                        angle REAL NOT NULL
-                                        i_x INT
-                                        i_y INT
+                                        led_id INT NOT NULL,
+                                        angle REAL NOT NULL,
+                                        i_x INT,
+                                        i_y INT,
                                         PRIMARY KEY (led_id, angle)
                                     ); """
                                     
