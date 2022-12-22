@@ -19,9 +19,9 @@ if __name__ == '__main__':
     db.create_table(conn, sql_create_lengthcalib)
     
     if db.create_lengthcalib(conn, (1, value)) :
-        print("Created length calibration", ledid)
+        print("Created length calibration with value", value)
     elif db.update_lengthcalib(conn, (value, 1)) : 
-        print("Updated length calibration", ledid)
+        print("Updated length calibration with value", value)
     else :
         print("[ERROR]: Length calibration could not be registered with the database.")
         
