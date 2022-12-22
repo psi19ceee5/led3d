@@ -17,8 +17,9 @@ for (( i = 0; i < $NLEDs; i++ )); do
   VALS=$(python3 take_photo.py -a $ANGLE -n $i)
   if (( $(echo $VALS | awk '{print $4}') > 150 )); then
     ssh pokke " source ${PROJECTPATH}/activate; \
-                ${PROJECTPATH}/raspi/pos2db.py $VALS; \
-                sudo ${PROJECTPATH}/raspi/OFF.py "
+                cd ${PROJECTPATH}/raspi; \
+                ./pos2db.py $VALS; \
+                sudo ./OFF.py "
   else
     ssh pokke " source ${PROJECTPATH}/activate; \
                 sudo ${PROJECTPATH}/raspi/OFF.py "
