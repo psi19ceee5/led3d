@@ -8,7 +8,7 @@ def create_connection(db_file) :
     try:
         conn = sqlite3.connect(db_file)
     except Error as e :
-        print("[ERROR]:", e)
+        print("[ERROR]: (create_connection):", e)
         
     return conn
 
@@ -17,7 +17,7 @@ def create_table(conn, create_table_sql) :
         c = conn.cursor()
         c.execute(create_table_sql)
     except Error as e :
-        print("[ERROR]:", e)
+        print("[ERROR] (create_table):", e)
         
 # db table 'measurements'
 def create_measurement(conn, data) :
@@ -28,7 +28,7 @@ def create_measurement(conn, data) :
         cur.execute(sql, data)
         conn.commit()
     except Error as e :
-#        print("[ERROR]:", e)
+        # print("[ERROR]:", e)
         return False
         
     return True
