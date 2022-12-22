@@ -11,6 +11,7 @@ source ./activate
 FACTOR=$(cat /tmp/lengthcalib)
 
 ssh pokke "source ${PROJECTPATH}/activate; \
-              ${PROJECTPATH}/raspi/lencal2db.py $FACTOR"
+           cd ${PROJECTPATH}/raspi; \
+           ./lencal2db.py $FACTOR"
 
 rm /tmp/lengthcalib
