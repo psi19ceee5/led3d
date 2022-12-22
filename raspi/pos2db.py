@@ -7,9 +7,10 @@ sys.path.append('..')
 import src.dbio as db
 
 if __name__ == '__main__':
-    angle = sys.argv[1]
-    i_x = sys.argv[2]
-    i_y = sys.argv[3]
+    led_id = sys.argv[1]
+    angle = sys.argv[2]
+    i_x = sys.argv[3]
+    i_y = sys.argv[4]
 
     conn = db.create_connection('db/calibinfo.sqlite')
     
@@ -23,4 +24,4 @@ if __name__ == '__main__':
                                     
     db.create_table(conn, sql_create_measurements)
     
-    db.create_measurement(conn, (angle, i_x, i_y))
+    db.create_measurement(conn, (led_id, angle, i_x, i_y))
