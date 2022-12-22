@@ -12,7 +12,7 @@ if __name__ == '__main__':
     conn = db.create_connection('db/calibinfo.sqlite')
     
     sql_create_lengthcalib = """ CREATE TABLE IF NOT EXISTS lengthcalib (
-                                        id INT PRIMARY KEY
+                                        id INT PRIMARY KEY,
                                         meter_per_pixel REAL NOT NULL
                                     ); """
                                     
