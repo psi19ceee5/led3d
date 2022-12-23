@@ -56,4 +56,4 @@ if __name__ == "__main__" :
         cv.destroyAllWindows()
     
     if not debug :
-        print(angle, imax[0], imax[1])
+        print(angle, imax[1], imax[0])
