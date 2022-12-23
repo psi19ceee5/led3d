@@ -2,6 +2,7 @@
 
 import sqlite3
 from sqlite3 import Error
+import numpy as np
 
 def create_connection(db_file) :
     conn = None
@@ -50,10 +51,10 @@ def read_measurement(conn, id) :
     cur = conn.cursor()
     cur.execute(sql, (id,))
     
-    (_, angle, i_x, i_y) = cur.fetchall()[0]
+    rows = np.array(cur.fetchall())
     
-    return (angle, i_x, i_y) 
-
+    return rows[:,1:]
+    
 # db table 'led'
 def create_led(conn, data) :
     sql = """ INSERT INTO leds (led_id, x, y, z)
@@ -101,8 +102,8 @@ def read_led(conn, id) :
 
 # db table 'lengthcalib'
 def create_lengthcalib(conn, data) :
-    sql = """ INSERT INTO lengthcalib (id, meter_per_pixel)
-              VALUES(?, ?) """
+    sql = """ INSERT INTO lengthcalib (id, meter_per_pixel, img_size_x, img_size_y)
+              VALUES(?, ?, ?, ?) """
     try :
         cur = conn.cursor()
         cur.execute(sql, data)
@@ -121,8 +122,10 @@ def delete_lengthcalib(conn, id) :
     
 def update_lengthcalib(conn, data) :   
     sql = """ UPDATE lengthcalib
-              SET meter_per_pixel = ?
-              WHERE id = ? """
+              SET meter_per_pixel = ?,
+              SET img_size_x = ?,
+              SET img_size_y = ?,
+              WHERE id = 1 """
     try :
         cur = conn.cursor()
         cur.execute(sql, data)

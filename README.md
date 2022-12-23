@@ -4,5 +4,5 @@ requirements:
   Python >3.7
 
 python packages:
-  pip install numpy opencv-python
+  pip install numpy scipy opencv-python
 
