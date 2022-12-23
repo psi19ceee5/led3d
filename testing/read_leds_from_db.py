@@ -1,8 +1,9 @@
 import sqlite3
 import bpy
 import sys
-sys.path.append('..')
 import math
+sys.path.append('..')
+import src.config as cfg
 import src.dbio as db
 import src.led as led
 
@@ -42,7 +43,7 @@ if __name__ == "__main__" :
     conn = db.create_connection("/home/philip/Projects/led3d/db/calibinfo.sqlite")
 
     leds = []
-    for id in range(500) :
+    for id in range(cfg.NLEDs) :
         (x, y, z) = db.read_led(conn, id)
         leds.append(sim_led(id, (x, y, z), (1, 1, 1)))
     
