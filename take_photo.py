@@ -66,4 +66,4 @@ if __name__ == "__main__" :
 #        print(npic, angle, imax[1], imax[0], filtered_img[imax]) # remove last variable
         print(npic, angle, imax[1], imax[0])
         if npic >= 0 :
-            cv.imwrite("/tmp/ImgCapture-"+str(npic)+".png", filtered_img_cpy)
+            cv.imwrite("/home/philip/Projects/led3d-calibpics/ImgCapture-"+str(angle)+"-"+str(npic)+".png", filtered_img_cpy)
