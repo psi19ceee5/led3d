@@ -44,8 +44,11 @@ if __name__ == "__main__" :
 
     leds = []
     for id in range(cfg.NLEDs) :
-        (x, y, z) = db.read_led(conn, id)
-        leds.append(sim_led(id, (x, y, z), (1, 1, 1)))
+        try :
+            (x, y, z) = db.read_led(conn, id)
+            leds.append(sim_led(id, (x, y, z), (1, 1, 1)))
+        except Exception :
+            print("[ERROR]:", Exception)
     
     fps = 25
     phase_r = 0
