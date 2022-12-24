@@ -70,7 +70,7 @@ if __name__ == "__main__" :
 
         measurement = measured_led(id)
         for angle in data :
-            measurement.add_data(angle[0], angle[2], angle[1]) # angle[2] = x angle[1] = y (switch back in next iteration)
+            measurement.add_data(angle[0], angle[1], angle[2]) # angle[2] = x angle[1] = y (switch back in next iteration)
             
         measurements.append(measurement)
         

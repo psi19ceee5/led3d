@@ -15,7 +15,7 @@ for (( i = 0; i < $NLEDs; i++ )); do
               cd ${PROJECTPATH}/raspi; \
               sudo ./LED_ON.py $i "
   VALS=$(python3 take_photo.py -a $ANGLE -n $i)
-  if (( $(echo $VALS | awk '{print $4}') > 150 )); then
+  if (( $(echo $VALS | awk '{print $5}') > 150 )); then
     echo $VALS
     ssh pokke " source ${PROJECTPATH}/activate; \
                 cd ${PROJECTPATH}/raspi; \
