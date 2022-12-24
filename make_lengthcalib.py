@@ -34,6 +34,8 @@ if __name__ == "__main__" :
         exit
     else :
         print("Shape of image: ", np.shape(image))
+
+    (height, width, _) = np.shape(image)
     
     print("Click on two pixels in the image. Make sure that the pixels point approximately to the same plane orthogonal to the camera axis.")
     cv.imshow('ImgCapture', image)
@@ -47,7 +49,7 @@ if __name__ == "__main__" :
     
     factor = dist/pxdist
     file = open("/tmp/lengthcalib", "w")
-    file.write(str(factor))
+    file.write(str(factor) + " " + str(width) + " " + str(height))
     file.close()
     print("Conversion factor [meter / pixel]:", factor)
     print("Press any key to quit")

@@ -52,8 +52,13 @@ def read_measurement(conn, id) :
     cur.execute(sql, (id,))
     
     rows = np.array(cur.fetchall())
-    
-    return rows[:,1:]
+
+    if len(np.shape(rows)) == 2 :
+        return rows[:,1:]
+    elif len(np.shape(rows)) == 1 :
+        return rows[1:]
+    else :
+        return None
     
 # db table 'led'
 def create_led(conn, data) :
