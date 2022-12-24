@@ -63,9 +63,9 @@ if __name__ == "__main__" :
     
     measurements = []
     for id in range(num_leds) :
-        data = db.read_measurement(conn, id)
+        data, status = db.read_measurement(conn, id)
 
-        if data == None :
+        if status == False :
             continue
         
         measurement = measured_led(id)
