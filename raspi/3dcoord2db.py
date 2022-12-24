@@ -65,9 +65,9 @@ if __name__ == "__main__" :
     for id in range(num_leds) :
         data, status = db.read_measurement(conn, id)
 
-        if status == False :
+        if status == 0 :
             continue
-        
+        print(id, status)
         measurement = measured_led(id)
         for angle in data :
             measurement.add_data(angle[0], angle[2], angle[1]) # angle[2] = x angle[1] = y (switch back in next iteration)
