@@ -32,9 +32,21 @@ if __name__ == "__main__" :
     failstat = [0]*len(leds)
     for n in range(len(leds)) :
         led = leds[n]
+        pos = np.array([led.x, led.y, led.z])
         rho = math.sqrt(led.x**2 + led.y**2)
         rcone = tree_radius * (1. - led.z/tree_height)
-        if rho > rcone :
+        dist0, dist1 = (0, 0)
+        if n > 0 :
+            led0 = leds[n-1]
+            pos0 = np.array([led0.x, led0.y, led0.z])
+            diff = pos - pos0
+            dist0 = np.linalg.norm(diff)
+        if n < len(leds) - 1 :
+            led1 = leds[n+1]
+            pos1 = np.array([led1.x, led1.y, led1.z])
+            diff = pos1 - pos
+            dist1 = np.linalg.norm(diff)
+        if rho > rcone or (dist0 > 0.3 and dist1 > 0.3) :
             failstat[n] = 1
             
     for n in range(len(leds)) :
@@ -50,6 +62,9 @@ if __name__ == "__main__" :
             print("correcting postion of led ", leds[n].led_id, leds[n].x, leds[n].y, leds[n].z, "->", intpos[0], intpos[1], intpos[2])
             leds[n].set_xyz(intpos[0], intpos[1], intpos[2])
             leds[n].commit(conn)
-            
+            failstat[n] = False
     
+    for n in range(len(failstat)) :
+        if failstat[n] :
+            db.delete_led(conn, n)
         
