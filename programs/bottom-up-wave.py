@@ -1,5 +1,4 @@
 import sqlite3
-import bpy
 import sys
 import math
 import board
@@ -13,9 +12,9 @@ import src.led as led
 class led(led.proto_led) :
     def commit(self) :
         id = self.led_id
-        r = self.r
-        g = self.g
-        b = self.b
+        r = round(255*self.r)
+        g = round(255*self.g)
+        b = round(255*self.b)
         
         # Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
         # NeoPixels must be connected to D10, D12, D18 or D21 to work.
@@ -53,7 +52,7 @@ if __name__ == "__main__" :
     phase_r = 0
     phase_g = 60*math.pi/180.
     phase_b = 120*math.pi/180.
-    t0 = time.time()
+    t = time.time()
     while True :
         t = time.time() - t
         for led in leds :
