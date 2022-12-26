@@ -27,7 +27,7 @@ if __name__ == "__main__" :
             (x, y, z) = db.read_led(conn, id)
             leds.append(db_led(id, pos=(x, y, z)))
         except Exception :
-            print("[ERROR]:", Exception)
+            print("[ERROR]: LED", id, " not in database.")
         
     failstat = [0]*len(leds)
     for n in range(len(leds)) :

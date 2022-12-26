@@ -48,7 +48,7 @@ if __name__ == "__main__" :
             (x, y, z) = db.read_led(conn, id)
             leds.append(sim_led(id, (x, y, z), (1, 1, 1)))
         except Exception :
-            print("[ERROR]:", Exception)
+            print("[ERROR]: LED", id, " not in database.")
     
     fps = 25
     phase_r = 0
