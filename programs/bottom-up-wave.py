@@ -12,7 +12,7 @@ import src.dbio as db
 import src.led as led
 
 class led(led.proto_led) :
-    def __init__(self, id, pos=(0, 0, 0), col=(0, 0, 0), ledchain) :
+    def __init__(self, id, ledchain, pos=(0, 0, 0), col=(0, 0, 0)) :
         super().__init__(id, pos=pos, col=col)
         self.ledchain = ledchain
         
@@ -54,7 +54,7 @@ if __name__ == "__main__" :
     for id in range(cfg.NLEDs) :
         try :
             (x, y, z) = db.read_led(conn, id)
-            leds.append(led(id, (x, y, z), (1, 1, 1), chain))
+            leds.append(led(id, chain, (x, y, z), (1, 1, 1)))
         except Exception :
             print("[ERROR]: LED", id, " not in database.")
     
