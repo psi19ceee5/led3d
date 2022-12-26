@@ -29,7 +29,7 @@ class led(led.proto_led) :
         ORDER = neopixel.RGB
         
         pixels = neopixel.NeoPixel(
-            pixel_pin, num_pixels, brightness=0.2, auto_write=False, pixel_order=ORDER
+            pixel_pin, num_pixels#, brightness=0.2, auto_write=False, pixel_order=ORDER
         )
         
         pixels[id] = (r, g, b)
