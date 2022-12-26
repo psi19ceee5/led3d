@@ -15,6 +15,7 @@ class led(led.proto_led) :
         r = round(255*self.r)
         g = round(255*self.g)
         b = round(255*self.b)
+        print(r, g, b)
         
         # Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
         # NeoPixels must be connected to D10, D12, D18 or D21 to work.
