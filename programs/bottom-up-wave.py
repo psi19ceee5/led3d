@@ -52,12 +52,12 @@ if __name__ == "__main__" :
     phase_r = 0
     phase_g = 60*math.pi/180.
     phase_b = 120*math.pi/180.
-    t = time.time()
+    t0 = time.time()
     while True :
-        t = time.time() - t
+        t = time.time() - t0
         for led in leds :
-            r = math.sin(0.5*math.pi*t/25. - (math.pi/0.25)*led.z + phase_r)**2
-            g = math.sin(0.5*math.pi*t/25. - (math.pi/0.25)*led.z + phase_g)**2
-            b = math.sin(0.5*math.pi*t/25. - (math.pi/0.25)*led.z + phase_b)**2
+            r = math.sin(0.5*math.pi*t - (math.pi/0.25)*led.z + phase_r)**2
+            g = math.sin(0.5*math.pi*t - (math.pi/0.25)*led.z + phase_g)**2
+            b = math.sin(0.5*math.pi*t - (math.pi/0.25)*led.z + phase_b)**2
             led.set_rgb(r, g, b)
             led.commit()
