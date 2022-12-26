@@ -67,9 +67,9 @@ if __name__ == "__main__" :
     while True :
         t = time.time() - t0
         for led in leds :
-            r = math.sin(0.5*math.pi*t - (math.pi/0.25)*led.z + phase_r)**2
-            g = math.sin(0.5*math.pi*t - (math.pi/0.25)*led.z + phase_g)**2
-            b = math.sin(0.5*math.pi*t - (math.pi/0.25)*led.z + phase_b)**2
+            r = math.sin(0.5*math.pi*t - (math.pi/0.75)*led.z + phase_r)**2
+            g = math.sin(0.5*math.pi*t - (math.pi/0.75)*led.z + phase_g)**2
+            b = math.sin(0.5*math.pi*t - (math.pi/0.75)*led.z + phase_b)**2
             led.set_rgb(r, g, b)
             led.commit()
         chain.commit()
