@@ -6,6 +6,8 @@ sys.path.append('..')
 import src.config as cfg
 import src.dbio as db
 import src.led as led
+from os.path import exists
+from os import remove
 
 # specify program here
 import programs.bottom_up_wave as prg
@@ -27,9 +29,18 @@ if __name__ == "__main__" :
 
     program = prg.program()
     t0 = time.time()
+    tref = t0
     dt = 0
     while True :
         t = time.time() - t0
+        if time.time() - tref > 10 :
+            if exists("/tmp/LEDSTOP") :
+                remove("/tmp/LEDSTOP")
+                chain.off()
+                chain.commit()
+                break
+            else :
+                tref = time.time()
         for LED in leds :
             program.set_coordinates(LED.x, LED.y, LED.z, t)
             r, g, b = program.get_rgb()

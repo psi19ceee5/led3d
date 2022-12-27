@@ -12,6 +12,10 @@ class proto_ledchain(ABC) :
     @abstractmethod
     def commit(self) :
         pass
+    
+    @abstractmethod
+    def off(self) :
+        pass
             
 # implementations of proto_led should expect pos in meter and col in range [0,1]
 class proto_led(ABC) :

@@ -24,6 +24,9 @@ class ledchain(pled.proto_ledchain) :
         
     def commit(self) :
         self.pixels.show()
+        
+    def off(self) :
+        self.pixels.fill((0, 0, 0))
                 
 class led(pled.proto_led) :
     def __init__(self, id, ledchain, pos=(0, 0, 0), col=(0, 0, 0)) :

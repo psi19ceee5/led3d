@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import sys
-import math
 sys.path.append('..')
 import src.config as cfg
 import src.dbio as db
@@ -34,4 +33,3 @@ if __name__ == "__main__" :
             LED.frame = frame
             LED.set_rgb(r, g, b)
             LED.commit()
-        chain.commit()

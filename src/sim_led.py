@@ -10,6 +10,11 @@ class sim_ledchain(pled.proto_ledchain) :
         
     def commit(self) :
         super().commit()
+        print("Method 'commit' has no effect for sim_ledchain")
+        
+    def off(self) :
+        super().off()
+        print("Method 'off' has no effect for sim_ledchain")
                 
 class sim_led(pled.proto_led) :
     def __init__(self, id, ledchain, pos=(0, 0, 0), col=(0, 0, 0)) :
