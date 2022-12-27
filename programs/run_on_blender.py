@@ -7,6 +7,9 @@ import src.config as cfg
 import src.dbio as db
 import src.sim_led as led
 
+# specify program here
+import programs.bottom_up_wave as prg
+
 if __name__ == "__main__" :
     
     conn = db.create_connection("/home/philip/Projects/led3d/db/calibinfo.sqlite")
@@ -21,15 +24,13 @@ if __name__ == "__main__" :
             print("[ERROR]: LED", id, " not in database.")
     
     fps = 10
-    phase_r = 0
-    phase_g = 60*math.pi/180.
-    phase_b = 120*math.pi/180.
+    program = prg.program()
+    
     for frame in range(250) :
         t = frame/fps
         for LED in leds :
-            r = math.sin(0.5*math.pi*t - (math.pi/0.75)*LED.z + phase_r)**2
-            g = math.sin(0.5*math.pi*t - (math.pi/0.75)*LED.z + phase_g)**2
-            b = math.sin(0.5*math.pi*t - (math.pi/0.75)*LED.z + phase_b)**2
+            program.set_coordinates(LED.x, LED.y, LED.z, t)
+            r, g, b = program.get_rgb()
             LED.frame = frame
             LED.set_rgb(r, g, b)
             LED.commit()
