@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
+import board
+import neopixel
 import sys
 sys.path.append('..')
 import src.config as cfg
 import src.proto_led as pled
-import board
-import neopixel
     
 class ledchain(pled.proto_ledchain) :
     def __init__(self, brightness=0.2, ORDER=neopixel.RGB) :
