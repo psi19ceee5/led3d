@@ -17,9 +17,9 @@ if __name__ == "__main__" :
     for id in range(cfg.NLEDs) :
         try :
             (x, y, z) = db.read_led(conn, id)
-            leds.append(led(id, chain, (x, y, z), (1, 1, 1)))
-        except Exception :
-            print("[ERROR]: LED", id, " not in database.")
+            leds.append(led.led(id, chain, (x, y, z), (1, 1, 1)))
+        except Exception as e :
+            print("[ERROR]:", e, "( LED", id,")")
     
     fps = 10.
     phase_r = 0
