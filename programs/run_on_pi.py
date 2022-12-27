@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import sys
-import math
 import time
 sys.path.append('..')
 import src.config as cfg
@@ -9,7 +8,7 @@ import src.dbio as db
 import src.led as led
 
 # specify program here
-import programs.bottom-up-wave as prg
+import programs.bottom_up_wave as prg
 
 if __name__ == "__main__" :
     
