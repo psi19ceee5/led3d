@@ -32,7 +32,7 @@ if __name__ == "__main__" :
         t = time.time() - t0
         for LED in leds :
             program.set_coordinates(LED.x, LED.y, LED.z, t)
-            r, g, b = program.fkt()
+            r, g, b = program.get_rgb()
             LED.set_rgb(r, g, b)
             LED.commit()
         chain.commit()
