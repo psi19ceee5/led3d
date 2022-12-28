@@ -23,6 +23,9 @@ class tmpprg(ABC) :
         self.y = y
         self.z = z
         self.t = t
+        
+    def set_state(self, t):
+        pass
     
     def get_rgb(self) :
         self.fkt()

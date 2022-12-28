@@ -7,7 +7,8 @@ import src.dbio as db
 import src.sim_led as led
 
 # specify program here
-import programs.bottom_up_wave as prg
+#import programs.bottom_up_wave as prg
+import programs.left_right_right_left as prg
 
 if __name__ == "__main__" :
     
@@ -27,6 +28,7 @@ if __name__ == "__main__" :
     
     for frame in range(250) :
         t = frame/fps
+        program.set_state(t)
         for LED in leds :
             program.set_coordinates(LED.x, LED.y, LED.z, t)
             r, g, b = program.get_rgb()

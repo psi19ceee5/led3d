@@ -10,7 +10,8 @@ from os.path import exists
 from os import remove
 
 # specify program here
-import programs.bottom_up_wave as prg
+#import programs.bottom_up_wave as prg
+import programs.left_right_right_left as prg
 
 if __name__ == "__main__" :
     
@@ -33,6 +34,7 @@ if __name__ == "__main__" :
     dt = 0
     while True :
         t = time.time() - t0
+        program.set_state(t)
         if time.time() - tref > 10 :
             if exists("/tmp/LEDSTOP") :
                 remove("/tmp/LEDSTOP")
