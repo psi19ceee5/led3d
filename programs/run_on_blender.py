@@ -8,7 +8,8 @@ import src.sim_led as led
 
 # specify program here
 #import programs.bottom_up_wave as prg
-import programs.left_right_right_left as prg
+#import programs.left_right_right_left as prg
+import programs.sparkling_candles as prg
 
 if __name__ == "__main__" :
     
