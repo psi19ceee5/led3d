@@ -35,7 +35,8 @@ class program(prg.tmpprg) :
                 self.candles.append((x, y, z))
                 
         self.candle_leds = [None]*len(self.candles)
-            
+        print("Number of candles in volume:", len(self.candles))    
+        self.leds_checked = []
         
     def set_state(self, t) :
         pass
@@ -45,14 +46,18 @@ class program(prg.tmpprg) :
         iscandle = False
         if self.id in self.candle_leds :
             iscandle = True
-        else :
+        elif not self.id in self.leds_checked :
             for n in range(len(self.candles)) :
-                if np.linalg.norm(np.array(pos) - np.array(self.candles[n])) < self.candle_rad :
+                if self.candle_leds[n] == None and np.linalg.norm(np.array(pos) - np.array(self.candles[n])) < self.candle_rad :
                     self.candle_leds[n] = self.id
                     iscandle = True
+                    break
 
         if iscandle :
             self.r, self.g, self.b = self.candle_col
         else :
             self.r, self.g, self.b = self.base_col
+            
+        if not self.id in self.leds_checked :
+            self.leds_checked.append(self.id)
 
