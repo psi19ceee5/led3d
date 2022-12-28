@@ -33,6 +33,8 @@ class program(prg.tmpprg) :
                     break
             if commit_candle :
                 self.candles.append((x, y, z))
+                
+        self.candle_leds = [None]*len(self.candles)
             
         
     def set_state(self, t) :
@@ -41,9 +43,13 @@ class program(prg.tmpprg) :
     def fkt(self) :
         pos = (self.x, self.y, self.z)
         iscandle = False
-        for can in self.candles :
-            if np.linalg.norm(np.array(pos) - np.array(can)) < self.candle_rad :
-                iscandle = True
+        if self.id in self.candle_leds :
+            iscandle = True
+        else :
+            for n in range(len(self.candles)) :
+                if np.linalg.norm(np.array(pos) - np.array(self.candles[n])) < self.candle_rad :
+                    self.candle_leds[n] = self.id
+                    iscandle = True
 
         if iscandle :
             self.r, self.g, self.b = self.candle_col
