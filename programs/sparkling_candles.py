@@ -14,7 +14,7 @@ class program(prg.tmpprg) :
         super().__init__()
         self.base_col = (0, 0.5, 0)
         self.candle_col = (1, 1, 0)
-        candle_dens = 40
+        candle_dens = 60
         self.candle_rad = 0.15
         mindist = 0.20
         vol = (cfg.xh - cfg.xl) * (cfg.yh - cfg.yl) * (cfg.zh - cfg.zl)
