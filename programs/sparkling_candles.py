@@ -12,7 +12,7 @@ import src.config as cfg
 class program(prg.tmpprg) :
     def __init__(self) :
         super().__init__()
-        self.base_col = (0, 0.5, 0)
+        self.base_col = (0, 0.3, 0)
         self.candle_col = (1, 1, 0)
         candle_dens = 60
         self.candle_rad = 0.15
