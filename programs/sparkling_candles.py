@@ -55,7 +55,6 @@ class program(prg.tmpprg) :
     def set_state(self, t) :
         if self.t0 > 0 :
             dt = t - self.t0
-            print(dt)
             self.candle_brightness = self.brightness_fkt(dt, self.candle_brightness)
         self.t0 = t
 
