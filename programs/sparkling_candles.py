@@ -14,7 +14,7 @@ class program(prg.tmpprg) :
         super().__init__()
         self.base_col = (0, 0.5, 0)
         self.candle_col = (1, 1, 0)
-        candle_dens = 20
+        candle_dens = 40
         self.candle_rad = 0.15
         mindist = 0.20
         vol = (cfg.xh - cfg.xl) * (cfg.yh - cfg.yl) * (cfg.zh - cfg.zl)
@@ -34,27 +34,50 @@ class program(prg.tmpprg) :
             if commit_candle :
                 self.candles.append((x, y, z))
                 
-        self.candle_leds = [None]*len(self.candles)
-        print("Number of candles in volume:", len(self.candles))    
+        self.candle_leds = np.array([None]*len(self.candles))
+        print("Number of candles in volume:", len(self.candles))
+        self.candle_brightness = np.array([1]*len(self.candles))
         self.leds_checked = []
+        self.t0 = 0
+        
+    def brightness_fkt(self, dt, b0) :
+        b0 *= 1000
+        pull = 0.3
+        db = pull*(1000-b0)
+        lam = 2*dt
+        dimm = 300*np.random.uniform(0,1,len(self.candles))*np.random.poisson(lam,len(self.candles))
+        bright = b0 - dimm + db
+        bright = bright * (bright > 0).astype(int)
+        bright /= 1000
+        return bright
+
         
     def set_state(self, t) :
-        pass
+        if self.t0 > 0 :
+            dt = t - self.t0
+            print(dt)
+            self.candle_brightness = self.brightness_fkt(dt, self.candle_brightness)
+        self.t0 = t
+
+        
                 
     def fkt(self) :
         pos = (self.x, self.y, self.z)
         iscandle = False
+        bright = 1.
         if self.id in self.candle_leds :
             iscandle = True
+            bright = self.candle_brightness[np.where(self.candle_leds == self.id)[0][0]]
         elif not self.id in self.leds_checked :
             for n in range(len(self.candles)) :
                 if self.candle_leds[n] == None and np.linalg.norm(np.array(pos) - np.array(self.candles[n])) < self.candle_rad :
                     self.candle_leds[n] = self.id
                     iscandle = True
                     break
-
+                
+                                
         if iscandle :
-            self.r, self.g, self.b = self.candle_col
+            self.r, self.g, self.b = (x*bright for x in self.candle_col)
         else :
             self.r, self.g, self.b = self.base_col
             
