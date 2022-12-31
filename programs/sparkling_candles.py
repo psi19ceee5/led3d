@@ -39,6 +39,9 @@ class program(prg.tmpprg) :
         self.candle_brightness = np.array([1]*len(self.candles))
         self.leds_checked = []
         self.t0 = 0
+        self.shootinStarProb = 1.
+        self.shootingStarVel = 1.
+        self.hasShootingStar = False
         
     def brightness_fkt(self, dt, b0) :
         b0 *= 1000
@@ -57,7 +60,18 @@ class program(prg.tmpprg) :
             dt = t - self.t0
             self.candle_brightness = self.brightness_fkt(dt, self.candle_brightness)
         self.t0 = t
-
+        
+        # if no shooting star exists: roll dice
+        if not self.HasShootingStar :
+            if self.shootingStarProb*dt > rnd.random() :
+                self.hasShootingStar = True
+                # find trajectory and initial state of shooting star
+                # 1. random pivot point within tree-cube
+                # 2. random zenith angle between 0 and 60 deg and random azimuth angle between 0 and 360 deg
+                # 3. parameterize curve: starting at top-intersection and ending with ground-intersection:
+                #    at t0, star starts at height, propagages with v
+                # 4. write curve-parameters and current position of shooting star to member variables
+                # 5. update position of star according to pos1 = pos0 + v*dt                                
         
                 
     def fkt(self) :
@@ -82,4 +96,6 @@ class program(prg.tmpprg) :
             
         if not self.id in self.leds_checked :
             self.leds_checked.append(self.id)
+            
+        # check if led is close to shooting star and override col = (1, 1, 1)
 
