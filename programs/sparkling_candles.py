@@ -94,10 +94,7 @@ class program(prg.tmpprg) :
                 self.ssStart = np.array([xstart, ystart, zstart])
                 self.ssPos = self.ssStart
                 self.ssDir = (pivot - self.ssStart)
-                self.ssDir /= np.linalg.norm(self.ssDir)
-
-        print(self.ssPos)                
-        
+                self.ssDir /= np.linalg.norm(self.ssDir)        
                 
     def fkt(self) :
         pos = (self.x, self.y, self.z)
