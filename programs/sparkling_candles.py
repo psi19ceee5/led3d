@@ -14,7 +14,7 @@ class program(prg.tmpprg) :
         super().__init__()
         self.base_col = (0, 0.3, 0)
         self.candle_col = (1, 1, 0)
-        candle_dens = 60
+        candle_dens = 100
         self.candle_rad = 0.15
         mindist = 0.20
         vol = (cfg.xh - cfg.xl) * (cfg.yh - cfg.yl) * (cfg.zh - cfg.zl)
@@ -41,7 +41,7 @@ class program(prg.tmpprg) :
         self.t0 = 0
 
         self.hasShootingStar = False
-        self.ssProb = 1.
+        self.ssProb = 1.5
         self.ssVel = 1.
         self.ssZenith = 0
         self.ssAzimuth = 0
