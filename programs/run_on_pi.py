@@ -21,13 +21,15 @@ elif len(sys.argv) == 2 :
         import programs.sparkling_candles as prg
     else :
         print("[ERROR]: program", program, "does not exist")
+        exit
 elif len(sys.argv) > 2 :
     print("[ERROR]: too many arguments. Usage: ./run_on_pi <module name>")
+    exit
 
 # specify program here
 #import programs.bottom_up_wave as prg
 #import programs.left_right_right_left as prg
-import programs.sparkling_candles as prg
+#import programs.sparkling_candles as prg
 
 if __name__ == "__main__" :
     
