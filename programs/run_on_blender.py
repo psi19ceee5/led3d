@@ -10,7 +10,8 @@ import src.utilities as ut
 # specify program here
 #import programs.bottom_up_wave as prg
 #import programs.left_right_right_left as prg
-import programs.sparkling_candles as prg
+#import programs.sparkling_candles as prg
+import programs.traversing_plane as prg
 
 if __name__ == "__main__" :
     
@@ -32,7 +33,7 @@ if __name__ == "__main__" :
         t = frame/fps
         program.set_state(t)
         for LED in leds :
-            program.set_coordinates(LED.led_id, LED.x, LED.y, LED.z, t)
+            program.set_coordinates(LED.led_id, LED.x, LED.y, LED.z)
             r, g, b = program.get_rgb()
             LED.frame = frame
             LED.set_rgb(r, g, b)

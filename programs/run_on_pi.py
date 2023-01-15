@@ -63,7 +63,7 @@ if __name__ == "__main__" :
             else :
                 tref = time.time()
         for LED in leds :
-            program.set_coordinates(LED.led_id, LED.x, LED.y, LED.z, t)
+            program.set_coordinates(LED.led_id, LED.x, LED.y, LED.z)
             r, g, b = program.get_rgb()
             LED.set_rgb(r, g, b)
             LED.commit()

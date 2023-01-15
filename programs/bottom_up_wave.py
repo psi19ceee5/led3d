@@ -14,6 +14,9 @@ class program(prg.tmpprg) :
         self.phase_r = 0.
         self.phase_g = 60.*ut.deg2rad
         self.phase_b = 120.*ut.deg2rad
+        
+    def set_state(self, t) :
+        self.t = t
                 
     def fkt(self) :
         self.r = math.sin(0.5*math.pi*self.t - (math.pi/0.75)*self.z + self.phase_r)**2

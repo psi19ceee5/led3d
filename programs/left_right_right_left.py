@@ -18,8 +18,6 @@ class program(prg.tmpprg) :
         self.vel = 0.3
         self.pos = self.xl
         self.t0 = self.t
-        self.col_right = rnd.randint(0, 2)
-        self.col_left = (self.col_right + rnd.choice([-1,1])) % 3
         self.colmap = {0: (1, 0, 0), 
                        1: (0, 1, 0), 
                        2: (0, 0, 1),
@@ -36,15 +34,19 @@ class program(prg.tmpprg) :
                        13: (0, 1, 0.5),
                        14: (0.5, 0, 1),
                        15: (0, 0.5, 1)}
+        self.ncolors = len(self.colmap)
+        self.col_right = rnd.randint(0, self.ncolors - 1)
+        self.col_left = (self.col_right + rnd.randint(1, self.ncolors-1)) % self.ncolors
         self.unused_colors = np.array([])
         self.update_unused_col()
         
     def update_unused_col(self) :
         self.unused_colors = np.arange(0, len(self.colmap))
         self.unused_colors = np.delete(self.unused_colors, np.where(self.unused_colors == self.col_right))
-        self.unused_colors = np.delete(self.unused_colors, np.where(self.unused_colors == self.col_left))                                                                    
+        self.unused_colors = np.delete(self.unused_colors, np.where(self.unused_colors == self.col_left))
         
     def set_state(self, t) :
+        self.t = t
         dt = self.t - self.t0
         self.t0 = self.t
         self.pos += self.vel*dt
@@ -59,7 +61,7 @@ class program(prg.tmpprg) :
             self.col_left = self.unused_colors[rnd.randint(0, len(self.unused_colors)-1)]
             self.update_unused_col()
                 
-    def fkt(self) :            
+    def fkt(self) :
         if self.x < self.pos :
             self.r, self.g, self.b = self.colmap[self.col_left]
         else:

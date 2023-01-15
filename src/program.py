@@ -19,12 +19,11 @@ class tmpprg(ABC) :
     def fkt(self) :
         pass
     
-    def set_coordinates(self, id, x, y, z, t) :
+    def set_coordinates(self, id, x, y, z) :
         self.id = id
         self.x = x
         self.y = y
         self.z = z
-        self.t = t
         
     def set_state(self, t):
         pass
