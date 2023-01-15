@@ -5,6 +5,7 @@ sys.path.append('..')
 import src.config as cfg
 import src.dbio as db
 import src.sim_led as led
+import src.utilities as ut
 
 # specify program here
 #import programs.bottom_up_wave as prg
@@ -22,7 +23,7 @@ if __name__ == "__main__" :
             (x, y, z) = db.read_led(conn, id)
             leds.append(led.sim_led(id, chain, (x, y, z), (1, 1, 1)))
         except Exception :
-            print("[ERROR]: LED", id, " not in database.")
+            ut.warn("LED", id, " not in database.")
     
     fps = 10
     program = prg.program()

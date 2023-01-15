@@ -37,7 +37,7 @@ class program(prg.tmpprg) :
                 self.candles.append((x, y, z))
                 
         self.candle_leds = np.array([None]*len(self.candles))
-        print("Number of candles in volume:", len(self.candles))
+        ut.info("number of candles in volume:", len(self.candles))
         self.candle_brightness = np.array([1]*len(self.candles))
         self.leds_checked = []
         self.t0 = 0

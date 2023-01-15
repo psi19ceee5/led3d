@@ -8,6 +8,7 @@ sys.path.append('..')
 import src.config as cfg
 import src.dbio as db
 import src.led as led
+import src.utilities as ut
 
 class db_led(led.proto_led) :
     def commit(self, conn) :
@@ -27,7 +28,7 @@ if __name__ == "__main__" :
             (x, y, z) = db.read_led(conn, id)
             leds.append(db_led(id, pos=(x, y, z)))
         except Exception :
-            print("[ERROR]: LED", id, " not in database.")
+            ut.error("LED", id, "not in database.")
         
     failstat = [0]*len(leds)
     for n in range(len(leds)) :
@@ -59,7 +60,7 @@ if __name__ == "__main__" :
             pos1 = np.array([led1.x, led1.y, led1.z])
             diff = pos1 - pos0
             intpos = pos0 + 0.5*diff
-            print("correcting postion of led ", leds[n].led_id, leds[n].x, leds[n].y, leds[n].z, "->", intpos[0], intpos[1], intpos[2])
+            ut.info("correcting postion of led ", leds[n].led_id, leds[n].x, leds[n].y, leds[n].z, "->", intpos[0], intpos[1], intpos[2])
             leds[n].set_xyz(intpos[0], intpos[1], intpos[2])
             leds[n].commit(conn)
             failstat[n] = False

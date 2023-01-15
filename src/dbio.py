@@ -3,13 +3,16 @@
 import sqlite3
 from sqlite3 import Error
 import numpy as np
+import sys
+sys.path.append('..')
+import src.utilities as ut
 
 def create_connection(db_file) :
     conn = None
     try:
         conn = sqlite3.connect(db_file)
     except Error as e :
-        print("[ERROR]: (create_connection):", e)
+        ut.error("(create_connection):", e)
         
     return conn
 
@@ -18,7 +21,7 @@ def create_table(conn, create_table_sql) :
         c = conn.cursor()
         c.execute(create_table_sql)
     except Error as e :
-        print("[ERROR] (create_table):", e)
+        ut.error("(create_table):", e)
         
 # db table 'measurements'
 def create_measurement(conn, data) :
@@ -29,7 +32,7 @@ def create_measurement(conn, data) :
         cur.execute(sql, data)
         conn.commit()
     except Error as e :
-        # print("[ERROR]:", e)
+        # ut.error(e)
         return False
         
     return True
@@ -69,7 +72,7 @@ def create_led(conn, data) :
         cur.execute(sql, data)
         conn.commit()
     except Error as e :
-#        print("[ERROR]:", e)
+#        ut.error(e)
         return False
         
     return True
@@ -85,7 +88,7 @@ def update_led(conn, data) :
         cur.execute(sql, data)
         conn.commit()
     except Error as e :
-        print("[ERROR]: ", e)
+        ut.error(e)
         return False
     
     return True
@@ -114,7 +117,7 @@ def create_lengthcalib(conn, data) :
         cur.execute(sql, data)
         conn.commit()
     except Error as e :
-        print("[ERROR]: ", e)
+        ut.error(e)
         return False
     
     return True
@@ -136,7 +139,7 @@ def update_lengthcalib(conn, data) :
         cur.execute(sql, data)
         conn.commit()
     except Error as e :
-        print("[ERROR]: ", e)
+        ut.error(e)
         return False
     
     return True

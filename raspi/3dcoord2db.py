@@ -25,17 +25,17 @@ class measured_led :
         empty = ''
         for angle in self.measurement :
             if count == 0 :
-                print(f"id {self.id:<5} --- {angle:<5}: ({self.measurement[angle][0]}, {self.measurement[angle][1]})")
+                ut.info(f"id {self.id:<5} --- {angle:<5}: ({self.measurement[angle][0]}, {self.measurement[angle][1]})")
             else :
-                print(f"{empty:<8} --- {angle:<5}: ({self.measurement[angle][0]}, {self.measurement[angle][1]})")
+                ut.info(f"{empty:<8} --- {angle:<5}: ({self.measurement[angle][0]}, {self.measurement[angle][1]})")
             count += 1
         return ''
     
 def minfunc(x, *args) :
     if len(x) != 2 :
-        print("[ERROR]: x has to have a length of 2 in minfunc")
+        ut.error("x has to have a length of 2 in minfunc.")
     if len(args) % 2 != 0 :
-        print("[ERROR]: something went wrong with the number of parameters in minfunc.")
+        ut.error("something went wrong with the number of parameters in minfunc.")
 
     n_meas = round(len(args)/2)
     result = 0
@@ -94,9 +94,9 @@ if __name__ == "__main__" :
         z *= meter_per_pixel
         
         if db.create_led(conn, (m.id, x, y, z)) :
-            print("Created led number", m.id, "at", x, y, z)
+            ut.info("created led number", m.id, "at", x, y, z)
         elif db.update_led(conn, (x, y, z, m.id)) : 
-            print("Updated led number", m.id, "at", x, y, z)
+            ut.info("updated led number", m.id, "at", x, y, z)
         else :
-            print("[ERROR]: Led number", ledid,"could not be registered with the database.")
+            ut.error("led number", m.id, "could not be registered with the database.")
                     

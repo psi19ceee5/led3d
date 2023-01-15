@@ -31,11 +31,11 @@ if __name__ == "__main__" :
     result, image = cam.read()
     
     if not result :
-        print("[ERROR]: No image has been taken. Perhaps, try another camera port.")
-        exit
+        ut.error("No image has been taken. Perhaps, try another camera port.")
+        exit()
     else :
         if debug :
-            print("Shape of image: ", np.shape(image))
+            ut.info("shape of image: ", np.shape(image))
         
     # note: colors in BGR
     #filtered_img = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
@@ -44,8 +44,8 @@ if __name__ == "__main__" :
     
     imax = np.unravel_index(filtered_img.argmax(), np.shape(filtered_img))
     if debug :
-        print("Brightest pixel (first occurence):", imax)
-        print("Brightness:", filtered_img[imax])
+        ut.info("brightest pixel (first occurence):", imax)
+        ut.info("brightness:", filtered_img[imax])
     
     hot_pixels = 0
     for i_ in range(len(filtered_img)) :
@@ -56,13 +56,13 @@ if __name__ == "__main__" :
                 hot_pixels += 1
                 
     if debug :
-        print("Hottest pixels:", hot_pixels)
-        print("Viewing angle:", angle, "deg")
+        ut.info("hottest pixels:", hot_pixels)
+        ut.info("viewing angle:", angle, "deg")
         cv.imshow("ImgCapture", image)
         cv.waitKey(0)
         cv.destroyAllWindows()
     
     if not debug :
-        print(npic, angle, imax[1], imax[0], filtered_img[imax])
+        ut.info(npic, angle, imax[1], imax[0], filtered_img[imax])
         if npic >= 0 :
             cv.imwrite("/home/philip/Projects/led3d-calibpics/ImgCapture-"+str(angle)+"-"+str(npic)+".png", filtered_img_cpy)

@@ -6,6 +6,7 @@ sys.path.append('..')
 import src.config as cfg
 import src.dbio as db
 import src.led as led
+import src.utilities as ut
 from os.path import exists
 from os import remove
 
@@ -20,10 +21,10 @@ elif len(sys.argv) == 2 :
     elif program == "sparkling_candles" :
         import programs.sparkling_candles as prg
     else :
-        print("[ERROR]: program", program, "does not exist")
+        ut.error("program", program, "does not exist")
         exit()
 elif len(sys.argv) > 2 :
-    print("[ERROR]: too many arguments. Usage: ./run_on_pi <module name>")
+    ut.error("too many arguments. Usage: ./run_on_pi <module name>")
     exit()
 
 # specify program here
@@ -42,7 +43,7 @@ if __name__ == "__main__" :
             (x, y, z) = db.read_led(conn, id)
             leds.append(led.led(id, chain, (x, y, z), (1, 1, 1)))
         except Exception as e :
-            print("[ERROR]:", e, "( LED", id,")")
+            ut.warn(e, "( LED", id,")")
     
     fps = 10.
 

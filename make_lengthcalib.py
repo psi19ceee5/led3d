@@ -10,7 +10,7 @@ coords = []
 
 def mouseclick(event, y, x, flags, params) :
     if event == cv.EVENT_LBUTTONDOWN:
-        print("Pixel clicked:", (x,y))
+        ut.info("Pixel clicked:", (x,y))
         ut.draw_reticle(image, (x,y))
         cv.imshow('ImgCapture', image)
         coords.append((x,y))
@@ -30,14 +30,14 @@ if __name__ == "__main__" :
     result, image = cam.read()
 
     if not result :
-        print("[ERROR]: No image has been taken. Perhaps, try another camera port.")
-        exit
+        ut.error("no image has been taken. Perhaps, try another camera port.")
+        exit()
     else :
-        print("Shape of image: ", np.shape(image))
+        ut.info("shape of image: ", np.shape(image))
 
     (height, width, _) = np.shape(image)
     
-    print("Click on two pixels in the image. Make sure that the pixels point approximately to the same plane orthogonal to the camera axis.")
+    ut.info("click on two pixels in the image. Make sure that the pixels point approximately to the same plane orthogonal to the camera axis.")
     cv.imshow('ImgCapture', image)
     cv.setMouseCallback('ImgCapture', mouseclick)
     
@@ -51,6 +51,6 @@ if __name__ == "__main__" :
     file = open("/tmp/lengthcalib", "w")
     file.write(str(factor) + " " + str(width) + " " + str(height))
     file.close()
-    print("Conversion factor [meter / pixel]:", factor)
-    print("Press any key to quit")
+    ut.info("conversion factor [meter / pixel]:", factor)
+    ut.info("press any key to quit")
     cv.waitKey(0)

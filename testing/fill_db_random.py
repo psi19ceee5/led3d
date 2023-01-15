@@ -5,6 +5,8 @@ import math
 import sys
 sys.path.append('..')
 import src.dbio as db
+import src.utilities as ut
+
 
 
 if __name__ == '__main__':
@@ -34,10 +36,10 @@ if __name__ == '__main__':
             z = rndz
         
             if db.create_led(conn, (ledid, x, y, z)) :
-                print("Created led number", ledid)
+                ut.info("created led number", ledid)
                 ledid += 1
             elif db.update_led(conn, (x, y, z, ledid)) : 
-                print("Updated led number", ledid)
+                ut.info("updated led number", ledid)
                 ledid += 1
             else :
-                print("[ERROR]: Led number", ledid,"could not be registered with the database.")
+                ut.error("led number", ledid,"could not be registered with the database.")
