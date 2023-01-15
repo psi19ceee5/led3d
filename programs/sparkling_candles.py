@@ -9,7 +9,7 @@ import src.program as prg
 import src.utilities as ut
 import src.config as cfg
 
-ut.info("program: sparkling_candles")
+ut.info("running program: \"sparkling_candles\"")
 
 class program(prg.tmpprg) :
     def __init__(self) :

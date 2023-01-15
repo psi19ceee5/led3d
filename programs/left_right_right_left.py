@@ -5,9 +5,9 @@ import random as rnd
 import sys
 sys.path.append('..')
 import src.program as prg
-import utilities as ut
+import src.utilities as ut
 
-ut.info("program: left_right_right_left")
+ut.info("running program: \"left_right_right_left\"")
 
 class program(prg.tmpprg) :
     def __init__(self) :
