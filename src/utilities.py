@@ -6,6 +6,14 @@ import numpy as np
 deg2rad = math.pi/180.
 rad2deg = 180./math.pi
 
+def info(txt):
+    print("\033[30;102;1m[INFO]:\033[0m", txt)
+    
+def warn(txt) :
+    print("\033[30;103;1m[WARNING]:\033[0m", txt)
+
+def error(txt) :
+    print("\033[30;101;1m[ERROR]:\033[0m", txt)
 
 def draw_reticle(image, imax) :
     ix = imax[1]

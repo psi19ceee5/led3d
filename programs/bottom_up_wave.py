@@ -6,6 +6,8 @@ sys.path.append('..')
 import src.program as prg
 import src.utilities as ut
 
+ut.info("program: bottom_up_wave")
+
 class program(prg.tmpprg) :
     def __init__(self) :
         super().__init__()
