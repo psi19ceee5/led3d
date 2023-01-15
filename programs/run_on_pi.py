@@ -18,6 +18,8 @@ elif len(sys.argv) == 2 :
         import programs.bottom_up_wave as prg
     elif program == "left_right_right_left" :
         import programs.left_right_right_left as prg
+    elif program == "traversing_plane" :
+        import programs.traversing_plane as prg
     elif program == "sparkling_candles" :
         import programs.sparkling_candles as prg
     else :
