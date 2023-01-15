@@ -9,6 +9,21 @@ import src.led as led
 from os.path import exists
 from os import remove
 
+if len(sys.argv) == 1 :
+    import programs.sparkling_candles as prg
+elif len(sys.argv) == 2 :
+    program = sys.argv[1]
+    if program == "bottom_up_wave" :
+        import programs.bottom_up_wave as prg
+    elif program == "left_right_right_left" :
+        import programs.left_right_right_left as prg
+    elif program == "sparkling_candles" :
+        import programs.sparkling_candles as prg
+    else :
+        print("[ERROR]: program", program, "does not exist")
+elif len(sys.argv) > 2 :
+    print("[ERROR]: too many arguments. Usage: ./run_on_pi <module name>")
+
 # specify program here
 #import programs.bottom_up_wave as prg
 #import programs.left_right_right_left as prg
