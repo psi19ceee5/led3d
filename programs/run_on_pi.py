@@ -54,7 +54,7 @@ if __name__ == "__main__" :
     while True :
         t = time.time() - t0
         program.set_state(t)
-        if time.time() - tref > 10 :
+        if time.time() - tref > 1 :
             if exists("/tmp/LEDSTOP") :
                 remove("/tmp/LEDSTOP")
                 chain.off()
