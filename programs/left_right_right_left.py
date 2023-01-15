@@ -6,14 +6,15 @@ import sys
 sys.path.append('..')
 import src.program as prg
 import src.utilities as ut
+import src.config as cfg
 
 ut.info("running program: \"left_right_right_left\"")
 
 class program(prg.tmpprg) :
     def __init__(self) :
         super().__init__()
-        self.xl = -0.35
-        self.xh = 0.55
+        self.xl = cfg.xl
+        self.xh = cfg.xh
         self.vel = 0.3
         self.pos = self.xl
         self.t0 = self.t
