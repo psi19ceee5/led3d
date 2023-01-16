@@ -73,7 +73,6 @@ class program(prg.tmpprg) :
     def fkt(self) :
         self.z -= (self.zh - self.zl)/2. # place rotation center at center of tree
         x_, y_, z_ = self.rot.apply(np.array([self.x, self.y, self.z]))
-        print(z_, " -- ", self.pos)
         if z_ > self.pos - self.width and z_ < self.pos + self.width :
             self.r, self.g, self.b = self.colmap[self.currentcol]
         else :
