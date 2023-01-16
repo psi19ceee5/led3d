@@ -4,7 +4,7 @@
 Python >3.7
 
 ## python packages:
-pip install numpy scipy opencv-python
+pip install numpy scipy opencv-python board neopixel
 
 ## running with blender:
 it might be convenient to run blender with the system python:
