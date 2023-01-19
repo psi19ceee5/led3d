@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+# usage ./calib_positions.sh ANGLE_DEG NLEDS
+
 PROJECTPATH=/home/pi/projects/led3d
 NLEDs=$(cat ./src/config.py | grep NLEDs | awk -F'=' '{print $2}' | xargs)
 ANGLE=$1
@@ -22,10 +24,11 @@ for (( i = 0; i < $NLEDs; i++ )); do
                 ./pos2db.py $VALS; \
                 sudo ./OFF.py "
   else
+    echo -e "\033[30;103;1m[WARNING]:\033[0m position of led number $i could not be determined." 
     ssh pokke " source ${PROJECTPATH}/activate; \
                 sudo ${PROJECTPATH}/raspi/OFF.py "
   fi
-  
+
 done
 
 echo "Finished at `date`"
