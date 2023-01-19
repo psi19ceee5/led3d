@@ -63,6 +63,6 @@ if __name__ == "__main__" :
         cv.destroyAllWindows()
     
     if not debug :
-        ut.info(npic, angle, imax[1], imax[0], filtered_img[imax])
+        print(npic, angle, imax[1], imax[0], filtered_img[imax])
         if npic >= 0 :
             cv.imwrite("/home/philip/Projects/led3d-calibpics/ImgCapture-"+str(angle)+"-"+str(npic)+".png", filtered_img_cpy)
