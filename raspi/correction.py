@@ -7,10 +7,10 @@ import numpy as np
 sys.path.append('..')
 import src.config as cfg
 import src.dbio as db
-import src.led as led
+import src.proto_led as pled
 import src.utilities as ut
 
-class db_led(led.proto_led) :
+class db_led(pled.proto_led) :
     def commit(self, conn) :
         db.update_led(conn, (self.x, self.y, self.z, self.led_id))
 
