@@ -144,11 +144,11 @@ def update_lengthcalib(conn, data) :
     
     return True
     
-def read_lengthcalib(conn, id) :
+def read_lengthcalib(conn) :
     sql = ' SELECT * FROM lengthcalib WHERE id = ? '
     cur = conn.cursor()
-    cur.execute(sql, (id,))
+    cur.execute(sql, (1,))
     
-    (_, x, y, z) = cur.fetchall()[0]
+    (_, meter_per_pixel, width_px, height_px) = cur.fetchall()[0]
     
-    return (x, y, z)
+    return (meter_per_pixel, width_px, height_px)
