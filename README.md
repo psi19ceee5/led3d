@@ -58,12 +58,14 @@
   Now, the calibration is complete and a complete 3d-model of your Christmas tree should exist in
   your database (```db/calibinfo.sql```).
 
-11. **running programs** The different programs defined in the ```programs``` folder can be run (on raspi) with
+11. Check the minimum and maximum values along the x, y and z axis (I recommend doing this with blender as described below) and enter them in ```src/config.py``` together with the total number of LEDs. Since this step is super annoying and redundant I have to get it done automatically someday..
+
+12. **running programs** The different programs defined in the ```programs``` folder can be run (on raspi) with
 
   ```programs/run_on_pi.py PROGRAM```
   
   with PROGRAM being the program name without the .py extension (e.g. ```bottom_up_wave```).
-12. Thats it for now. If you want to stop the program and turn all lights off, run (on raspi)
+13. Thats it for now. If you want to stop the program and turn all lights off, run (on raspi)
 
   ```raspi/OFF.py ```
    
@@ -78,11 +80,11 @@ if additional packages (like scipy, etc) are needed by the respective program.
 
 
 ## TODO
-- A global configuration file for user config
-- Automatic writing of config.py
-- Automate running a sequence of programs with fixed time each
+- A global configuration file for user config (add item in usage instruction)
+- Automatic writing of config.py (change text in usage instruction)
+- Automate running a sequence of programs with fixed time each (add item in usage instruction?)
 - more programs (this is always a to-do ;))
 
 ## NICE2HAVES
-- perspective distortion correction (change text in usage instructions when implemented)
+- perspective distortion correction (change text in usage instructions)
 - background-subtraction in calibration step
