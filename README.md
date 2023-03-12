@@ -2,6 +2,7 @@
 
 ## requirements:
 Python >3.7
+libportaudio-dev
 
 ## python packages:
 pip install numpy scipy opencv-python board neopixel
