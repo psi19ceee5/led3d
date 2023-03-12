@@ -11,6 +11,10 @@ import src.proto_led as pled
 import src.utilities as ut
 
 class db_led(pled.proto_led) :
+    def __init__(self, id, pos=(0, 0, 0)) :
+        self.led_id = id
+        (self.x, self.y, self.z) = pos
+        
     def commit(self, conn) :
         db.update_led(conn, (self.x, self.y, self.z, self.led_id))
 
