@@ -66,24 +66,29 @@ if __name__ == "__main__" :
         data, status = db.read_measurement(conn, id)
 
         if status == False :
+            ut.warn(f"could not read LED {id}:")
+            if data == None :
+                ut.warn("  no data found.")
+            else :
+                ut.warn("  only one measurement (not enough for reconstruction).")
             continue
 
         measurement = measured_led(id)
         for angle in data :
-            measurement.add_data(angle[0], angle[1], angle[2]) # angle[2] = x angle[1] = y (switch back in next iteration)
+            measurement.add_data(angle[0], angle[1], angle[2])
             
         measurements.append(measurement)
         
-    #(meter_per_pixel, img_size_x, img_size_y) = db.read_lengthcalib(conn)
-    (meter_per_pixel, img_size_x, img_size_y) = (0.0029, 640, 480)
+    (meter_per_pixel, img_size_x, img_size_y) = db.read_lengthcalib(conn)
                 
     for m in measurements :
         (x, y, z) = (0, 0, 0)
         params = []
         data = m.get_data()
+        rot_axis = round(img_size_x/2)
         for angle in data :
             params.append(angle)
-            params.append(data[angle][0])
+            params.append(data[angle][0] - rot_axis)
             z += data[angle][1]
         res = minimize(minfunc, [0, 0], args=tuple(params), method='Nelder-Mead', tol=1e-6)
         (x, y) = (res.x[0], res.x[1])
